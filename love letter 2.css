@@ -1,162 +1,152 @@
 body {
   margin: 0;
-  background: linear-gradient(to bottom, #f8e6ff, #fce4ec);
+  padding: 0;
+  background: linear-gradient(to bottom, #f3e7ff, #f8f0ff);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow-x: hidden;
+  min-height: 100vh;
   font-family: "Dancing Script", cursive;
+  overflow-x: hidden;
 }
 
+/* Envelope wrapper */
 #envelope {
   position: relative;
-  width: 320px;
-  height: 200px;
+  width: min(90vw, 340px);
+  height: calc(min(90vw, 340px) * 0.65);
   background-color: #d9534f;
   border-radius: 8px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
   cursor: pointer;
 }
 
-/* FLAP */
+/* Flap */
 .flap {
   position: absolute;
   width: 0;
   height: 0;
-  border-left: 160px solid transparent;
-  border-right: 160px solid transparent;
-  border-top: 110px solid #d9534f;
+  border-left: calc(min(90vw, 340px) / 2) solid transparent;
+  border-right: calc(min(90vw, 340px) / 2) solid transparent;
+  border-top: calc(min(90vw, 340px) * 0.35) solid #d9534f;
+  top: 0;
+  left: 0;
   transform-origin: top;
   transition: transform 0.5s ease;
   z-index: 3;
 }
 
-/* POCKET */
+/* Pocket */
 .pocket {
   position: absolute;
   width: 0;
   height: 0;
-  border-left: 160px solid #f5a3a2;
-  border-right: 160px solid #f5a3a2;
-  border-bottom: 100px solid #ff6f61;
-  border-top: 100px solid transparent;
+  border-left: calc(min(90vw, 340px) / 2) solid #f5a3a2;
+  border-right: calc(min(90vw, 340px) / 2) solid #f5a3a2;
+  border-bottom: calc(min(90vw, 340px) * 0.35) solid #ff6f61;
+  border-top: calc(min(90vw, 340px) * 0.35) solid transparent;
   bottom: 0;
+  left: 0;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
 
-/* LETTER */
+/* Letter */
 .letter {
   position: absolute;
-  width: 85%;
-  min-height: 70%;
   background: white;
-  border-radius: 8px;
+  width: 85%;
+  height: 80%;
+  top: 10%;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -20%);
-  padding: 15px;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  padding: 18px;
   box-sizing: border-box;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
+  text-align: center;
   z-index: 2;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
 }
 
-/* TEXT LINES */
+/* Text styles */
 .words {
-  background: #ffe6e6;
-  padding: 6px;
-  margin: 8px 0;
-  border-radius: 6px;
-  text-align: center;
-  font-size: 1.1rem;
+  margin-bottom: 10px;
+  background-color: #ffe6e6;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 .words.line1 {
   font-size: 0.9rem;
   text-align: left;
-  color: #333;
 }
 
-/* OPEN ANIMATION */
+.words.line2 {
+  font-size: 1.3rem;
+}
+
+.words.line3,
+.words.line4 {
+  font-size: 1.1rem;
+}
+
+/* Open animation */
 .open .flap {
   transform: rotateX(180deg);
 }
 
 .open .letter {
-  transform: translate(-50%, -120%);
+  transform: translate(-50%, -120px);
 }
 
-/* HEARTS */
+/* Hearts */
 .hearts {
   position: absolute;
-  top: 40%;
+  top: -80px;
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 20px;
-  z-index: 4;
+  gap: 15px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.open .hearts {
+  opacity: 1;
 }
 
 .heart {
-  width: 40px;
-  height: 40px;
-  background: #e60073;
+  width: 24px;
+  height: 24px;
+  background: #ff007f;
   transform: rotate(45deg);
-  animation: floatUp 4s infinite;
+  position: relative;
 }
 
 .heart::before,
 .heart::after {
   content: "";
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background: #e60073;
+  width: 24px;
+  height: 24px;
+  background: #ff007f;
   border-radius: 50%;
+  position: absolute;
 }
 
 .heart::before {
-  top: -20px;
+  top: -12px;
   left: 0;
 }
 
 .heart::after {
-  left: -20px;
+  left: -12px;
   top: 0;
 }
 
-@keyframes floatUp {
-  0% { transform: translateY(0) rotate(45deg); opacity: 1; }
-  100% { transform: translateY(-200px) rotate(45deg); opacity: 0; }
-}
-
-/* MOBILE RESPONSIVE */
+/* Mobile Fine Tuning */
 @media (max-width: 480px) {
-
-  #envelope {
-    width: 90vw;
-    height: 220px;
-  }
-
-  .flap {
-    border-left: 45vw solid transparent;
-    border-right: 45vw solid transparent;
-    border-top: 110px solid #d9534f;
-  }
-
-  .pocket {
-    border-left: 45vw solid #f5a3a2;
-    border-right: 45vw solid #f5a3a2;
-  }
-
-  .letter {
-    width: 90%;
-  }
-
-  .words {
-    font-size: 1rem;
-  }
-
+  .words.line2 { font-size: 1.2rem; }
+  .words.line3,
+  .words.line4 { font-size: 1rem; }
 }
