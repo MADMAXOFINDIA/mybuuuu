@@ -26,34 +26,38 @@ body {
   z-index: 1;
 }
 
-/* Letter */
+/* Letter - UPDATED to sit on top and move up */
 .letter {
   position: absolute;
   width: 92%;
-  height: 170px;
+  height: 180px; /* Slightly taller for extra text */
   background: white;
   border-radius: 10px;
-  top: 10px;
+  top: -70px; /* Moves the letter up out of the pocket */
   left: 4%;
-  z-index: 2;
+  z-index: 5; /* Sit above the flap (z-index 3) */
   padding: 20px;
   box-sizing: border-box;
   text-align: center;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transition: all 0.5s ease;
 }
 
 /* Text lines */
 .words {
   background: #f8dede;
-  margin: 12px 0;
+  margin: 10px 0;
   padding: 8px;
   border-radius: 10px;
   font-size: 18px;
 }
 
+/* First line specific styling for "To: My Princess bubu" */
 .words.line1 {
-  font-size: 16px;
+  font-size: 15px;
   text-align: left;
+  font-weight: bold;
+  color: #d63384; /* Deep pink to make the name pop */
 }
 
 /* Top flap */
@@ -90,10 +94,14 @@ body {
   z-index: 4;
 }
 
-/* Responsive */
+/* Responsive adjustments for mobile */
 @media (max-width: 480px) {
   #envelope {
     width: 90vw;
+  }
+
+  .letter {
+    top: -80px; /* Moves it even higher on small screens */
   }
 
   .flap {
